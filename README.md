@@ -12,25 +12,25 @@ $$
 G = (V, A)
 $$
 
-where each arc $((i,j) \in A)$ has an associated travel time $(t_{ij})$, the goal is to determine the minimum-time path from a source node $(s)$ to a destination node $(d)$.
+where each arc $(i,j) \in A$ has an associated travel time $t_{ij}$, the goal is to determine the minimum-time path from a source node $s$ to a destination node $d$.
 
-Unlike the classical shortest path problem, traversing a node $(i)$ requires a certain amount $(r_i)$ of a limited resource. The total resource consumption along the path cannot exceed the available amount $(R)$.
+Unlike the classical shortest path problem, traversing a node $i$ requires a certain amount $r_i$ of a limited resource. The total resource consumption along the path cannot exceed the available amount $R$.
 
 The problem can therefore be summarized as:
 
 * Objective: minimize total travel time.
-* Constraint: total resource consumption must not exceed $(R)$.
+* Constraint: total resource consumption must not exceed $R$.
 * Input: graph, travel times, node resource consumptions, source, destination, and resource availability.
 * Output: an optimal feasible path and its total travel time.
 
 Mathematical Model
 
-Let
+Let $x_{ij}$ be a binary variable indicating whether arc $(i,j)$ is used:
 
 $$
 x_{ij} =
 \begin{cases}
-1 & \text{if arc } (i,j) \text{ is used},\\
+1 & \text{if arc } (i,j) \text{ is used},\
 0 & \text{otherwise}.
 \end{cases}
 $$
@@ -44,25 +44,15 @@ $$
 subject to the flow conservation constraints:
 
 $$
-
 \sum_{j:(k,j)\in A} x_{kj}
-
--
 
 \sum_{i:(i,k)\in A} x_{ik}
 
-=
-
 \begin{cases}
-
-1 & \text{if } k=s,\\
-
--1 & \text{if } k=d,\\
-
+1 & \text{if } k=s,\
+-1 & \text{if } k=d,\
 0 & \text{otherwise}.
-
 \end{cases}
-
 $$
 
 and the resource constraint:
@@ -72,12 +62,12 @@ r_s +
 \sum_{i\in V\setminus{s}}
 r_i
 \left(
-\sum_{j:(j,i)\in A}x_{ji}
+\sum_{j:(j,i)\in A} x_{ji}
 \right)
 \leq R.
 $$
 
-The binary variables $(x_{ij})$ determine which arcs belong to the selected path.
+The binary variables $x_{ij}$ determine which arcs belong to the selected path.
 
 AMPL Implementation
 
@@ -106,7 +96,7 @@ The small size of the instance makes it possible to analyze the selected paths a
 
 Sensitivity Analysis
 
-The project also includes a simple sensitivity analysis on the resource availability parameter (R).
+The project also includes a simple sensitivity analysis on the resource availability parameter $R$.
 
 The model is solved for the following values:
 
@@ -114,7 +104,7 @@ $$
 R \in {6,7,8,9,12}.
 $$
 
-For each value of $(R)$, the minimum travel time and the corresponding path are reported.
+For each value of $R$, the minimum travel time and the corresponding path are reported.
 
 This experiment illustrates how increasing the available resource can make previously infeasible paths feasible and potentially lead to a different optimal solution.
 
@@ -127,9 +117,7 @@ The visualization is generated using:
 * NetworkX for graph representation and drawing;
 * Matplotlib for visualization.
 
-The script compares the optimal solutions obtained for different values of (R) and produces the image:
-
-rcsp_comparison.png
+The script compares the optimal solutions obtained for different values of $R$ and produces the image rcsp_comparison.png.
 
 The visualization shows:
 
@@ -169,7 +157,7 @@ Other compatible solvers can be used by changing this option, depending on the l
 
 Python
 
-Python is used only for graph visualization.
+Python is used for graph visualization.
 
 The Python dependencies are managed through pyproject.toml and uv.lock.
 
@@ -190,7 +178,7 @@ The script:
 2. loads the input data;
 3. solves the base instance;
 4. prints the minimum travel time and selected arcs;
-5. repeats the solution for different values of (R);
+5. repeats the solution for different values of $R$;
 6. reports the resulting paths and objective values.
 
 Running the Visualization
