@@ -1,0 +1,10 @@
+[project]
+name = "progetto-ricerca-operativa"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "networkx>=3.6.1",
+]

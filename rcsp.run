@@ -1,0 +1,39 @@
+# ============================================================
+# rcsp.run
+# Solves the base instance and repeats the solution for different values of R
+# ============================================================
+
+reset;
+model rcsp.mod;
+data rcsp.dat;
+
+option solver cplex;   # alternatively: cbc, highs, gurobi, ...
+
+solve;
+
+printf "\n=== Base solution (R = %d) ===\n", R;
+printf "Minimum time: %g\n", TotalTime;
+printf "Used arcs:\n";
+for {(i,j) in ARCS: x[i,j] > 0.5} {
+    printf "  %s -> %s  (t=%g)\n", i, j, t[i,j];
+}
+
+# ------------------------------------------------------------
+# Sensitivity analysis: R is varied to observe
+# how the optimal path and time change
+# ------------------------------------------------------------
+printf "\n=== Sensitivity to changes in R ===\n";
+printf "%6s %10s\n", "R", "MinTime";
+
+for {Rval in {6, 7, 8, 9, 12}} {
+    let R := Rval;
+    solve;
+    printf "%6d %10g   path: ", Rval, TotalTime;
+    for {(i,j) in ARCS: x[i,j] > 0.5} {
+        printf "%s-", i;
+    }
+    printf "%s\n", d;
+}
+
+# Restore the base value
+let R := 8;
