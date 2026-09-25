@@ -30,7 +30,7 @@ Let
 $$
 x_{ij} =
 \begin{cases}
-1 & \text{if arc } (i,j) \text{ is used},\
+1 & \text{if arc } (i,j) \text{ is used},\\
 0 & \text{otherwise}.
 \end{cases}
 $$
@@ -44,14 +44,14 @@ $$
 subject to the flow conservation constraints:
 
 $$
-\sum_{j:(k,j)\in A}x_{kj}
-
-\sum_{i:(i,k)\in A}x_{ik}
-
+\sum_{j:(k,j)\in A} x_{kj}
+-
+\sum_{i:(i,k)\in A} x_{ik}
+=
 \begin{cases}
-1 & k=s,\
--1 & k=d,\
-0 & \text{otherwise},
+1 & k=s,\\
+-1 & k=d,\\
+0 & \text{otherwise}.
 \end{cases}
 $$
 
