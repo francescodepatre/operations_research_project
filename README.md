@@ -44,15 +44,25 @@ $$
 subject to the flow conservation constraints:
 
 $$
+
 \sum_{j:(k,j)\in A} x_{kj}
+
 -
+
 \sum_{i:(i,k)\in A} x_{ik}
+
 =
+
 \begin{cases}
-1 & k=s,\\
--1 & k=d,\\
+
+1 & \text{if } k=s,\\
+
+-1 & \text{if } k=d,\\
+
 0 & \text{otherwise}.
+
 \end{cases}
+
 $$
 
 and the resource constraint:
